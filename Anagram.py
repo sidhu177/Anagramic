@@ -1,15 +1,18 @@
+## Importing the library files
 from flask import Flask, render_template, flash, request
 from wtforms import Form,TextField, TextAreaField, StringField, SubmitField
 from flask_bootstrap import Bootstrap
 import sys
 
-DEBUG=True
+## Setting Flask Config 
+DEBUG=False
 app = Flask(__name__)
 Bootstrap(app)
 app.config.from_object(__name__)
 app.config['SECRET_KEY'] = 'SuperSecretKey'
 strnum=0
 
+## Loading the dictionary file onto memory
 file = '/home/sidhu177/Desktop/flask/WordList.txt'
 def load(file):
     try:
@@ -24,6 +27,7 @@ def load(file):
 word_list = load(file)
 anagram_list = []
 
+## Core Flask Application
 class NameForm(Form):
     name = TextField('Word: ')
     #name = name.lower()
@@ -53,3 +57,7 @@ def Anagram():
             flash('Total Anagrams found = ' +str1)
     
     return render_template('index.html', form=form, data=anagram_list)
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return "Not Found: " + request.path
