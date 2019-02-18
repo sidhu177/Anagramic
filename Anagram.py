@@ -13,7 +13,7 @@ app.config['SECRET_KEY'] = 'SuperSecretKey'
 strnum=0
 
 ## Loading the dictionary file onto memory
-file = '/home/sidhu177/Desktop/flask/WordList.txt'
+file = '~/app/WordList.txt'
 def load(file):
     try:
         with open(file) as in_file:
