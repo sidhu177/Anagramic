@@ -10,11 +10,10 @@ jobs:
       - checkout
       - run:
           command: |
-              sudo chown -R circleci:circleci /opt/
               sudo pip install pipenv
               pipenv install
               sudo pip install -r requirements.txt
-              pipenv run python tests.py
+              python tests.py
       - store_test_results:
           path: test-results
       - store_artifacts:
