@@ -1,0 +1,22 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.7
+        environment: 
+            PIPENV_VENV_IN_PROJECT: true
+    steps:
+      - checkout
+      - run:
+          command: |
+              sudo chown -R circleci:circleci /opt/
+              sudo pip install pipenv
+              pipenv install
+              sudo pip install -r requirements.txt
+              pipenv run python tests.py
+      - store_test_results:
+          path: test-results
+      - store_artifacts:
+          path: test-results
+          destination: tr1
+
