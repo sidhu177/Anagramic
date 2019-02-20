@@ -13,7 +13,7 @@ app.config['SECRET_KEY'] = 'SuperSecretKey'
 strnum=0
 
 ## Loading the dictionary file onto memory
-file = '~/app/WordList.txt'
+file = '/opt/Anagramic/WordList.txt'
 def load(file):
     try:
         with open(file) as in_file:
@@ -61,3 +61,6 @@ def Anagram():
 @app.errorhandler(404)
 def page_not_found(e):
     return "Not Found: " + request.path
+
+if __name__=="__main__":
+    app.run(host='0.0.0.0')
