@@ -1,19 +1,16 @@
-FROM ubuntu:18.04
+FROM python:3.7-slim
 
 MAINTAINER "Sid Ramesh"
 
-COPY ./ ./Anagramic
+COPY ./ ./opt/Anagramic
 
-WORKDIR ./Anagramic
+WORKDIR ./opt/Anagramic
 
-RUN apt-get update
-RUN apt-get install git -y
-RUN apt-get install python3.7 -y
-RUN apt-get install python3-pip python3-dev build-essential libssl-dev libffi-dev python3-setuptools -y
-RUN apt-get install python-pip -y
+RUN pip install --upgrade pip
 RUN pip install pipenv 
-RUN pipenv install
-RUN pipenv shell
+RUN pipenv install --system --deploy --ignore-pipfile
 
-CMD gunicorn --bind 0.0.0.0:5000 wsgi:app
+EXPOSE 5000
+
+CMD ["gunicorn", "wsgi:app", "-b", "0.0.0.0:5000"]
 
