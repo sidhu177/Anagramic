@@ -23,8 +23,6 @@ pipeline {
         }
         stage('DeployToProduction') {
             steps {
-                input 'Deploy to Production?'
-                milestone(1)
                 withCredentials([sshUserPrivateKey(credentialsId: 'ssh_login', usernameVariable: 'ubuntu', keyFileVariable: 'keyfile')]) {
                     script {
                         sh " ssh -i $keyfile -o StrictHostKeyChecking=no ubuntu@3.91.200.161 \"docker pull sidhu177/anagramic:${env.BUILD_NUMBER}\""
