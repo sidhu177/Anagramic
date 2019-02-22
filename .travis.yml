@@ -1,12 +1,13 @@
 language: python
 
 python:
-    - 3.7
+    - 3.6.1
+
+$TRAVIS_BUILD_DIR: /opt/Anagramic
 
 install:
     - pip install pipenv
     - pipenv install
-    - pipenv shell
     
 script:
     - python tests.py
