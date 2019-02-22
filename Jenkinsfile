@@ -27,7 +27,7 @@ pipeline {
                 milestone(1)
                 withCredentials([sshUserPrivateKey(credentialsId: 'ssh_login', usernameVariable: 'ubuntu', keyFileVariable: 'keyfile')]) {
                     script {
-                        sh " ssh -i $keyfile ubuntu@3.91.200.161 \"docker pull sidhu177/anagramic:${env.BUILD_NUMBER}\""
+                        sh " ssh -i $keyfile -v ssh -o StrictHostKeyChecking=no ubuntu@3.91.200.161 \"docker pull sidhu177/anagramic:${env.BUILD_NUMBER}\""
                         try {
                             sh "ssh -i $keyfile  -v ssh -o StrictHostKeyChecking=no ubuntu@3.91.200.161 \"docker stop anagramic\""
                             sh "ssh -i $keyfile -v ssh -o StrictHostKeyChecking=no ubuntu@3.91.200.161 \"docker rm anagramic\""
