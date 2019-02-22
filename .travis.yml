@@ -3,10 +3,12 @@ language: python
 python:
     - 3.6
 
+before_install:
+    - cd /opt/Anagramic
+
 install:
     - pip install pipenv
     - pipenv install
-    - pipenv shell
     
 script:
     - python tests.py
