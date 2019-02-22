@@ -3,8 +3,7 @@ language: python
 python:
     - 3.6.1
 
-before_install:
-    - cd /opt/Anagramic
+$TRAVIS_BUILD_DIR: /opt/Anagramic
 
 install:
     - pip install pipenv
